@@ -9,6 +9,7 @@
     <script type="text/javascript" src="parsing_obj.js"></script>
     <script type="text/javascript" src="rendering_util.js"></script>
     <script type="text/javascript" src="main.js"></script>
+    <link rel="stylesheet" href="styles.css">
     <style>
         canvas {
             width: 100%; /* Full width */
@@ -18,8 +19,8 @@
         .gradient {
             font-size: 2.5rem;
             font-weight: bold;
-            background: linear-gradient(45deg, black, #333);
-            -webkit-background-clip: text; /* For Safari */
+            background: linear-gradient(45deg, black, black);
+            -webkit-background-clip: text;
             color: transparent; 
             text-align: center;
             margin-top: 20px;
@@ -28,11 +29,10 @@
 
     </style>
 </head>
-
 <body onload="main()">
     <div class="gradient">Tugas WEB GL - Yoga Firman Syahputra (5025221212) </div>
-    <canvas id="canvas" style="border: 1px solid black;">
-        <!-- Canvas fallback content if WebGL is not supportedss -->
+    <canvas id="canvas">
+        <!-- Canvas fallback content if WebGL is not supported -->
     </canvas>
 </body>
 </html>

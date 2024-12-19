@@ -1,6 +1,6 @@
 # Blender 4.2.1 LTS
 # www.blender.org
-mtllib uploads_files_4869166_duck+final.mtl
+mtllib duck_final.mtl
 o Duck
 v 0.060091 0.173653 0.096679
 v 0.056313 0.322232 0.024549

@@ -91,10 +91,9 @@ async function main() {
   const Program = createProgram(gl, vs, fs);
 
   // Load and Parse the object file and materials into javascript objects
-  const objHref = 'uploads_files_4869166_duck+final.obj';
-  const mtlHref = 'uploads_files_4869166_duck+final.mtl'; // Add your MTL file URL here
-  const obj = await loadOBJ(gl, objHref);
-  const materials = await loadMaterials(gl, obj, objHref, mtlHref); // Pass the optional mtlHref
+  const objHref = 'duck_final.obj';
+  const obj = await loadOBJ(gl, objHref);                  
+  const materials = await loadMaterials(gl, obj, objHref);
 
   // Get geometries extend and setup the camera and parts of geometry
   const extents = getGeometriesExtents(obj.geometries);
@@ -126,13 +125,15 @@ const loadOBJ = async (gl, objHref) => {
  * @param {WebGLRenderingContext} gl - The WebGL context.
  * @param {Object} obj - Parsed OBJ data.
  * @param {string} objHref - The URL to the OBJ file.
+ * @param {string} [mtlHref] - The optional URL to the MTL file.
  * @returns {Promise<Object>} The parsed material data with textures.
  */
-const loadMaterials = async (gl, obj, objHref) => {
+const loadMaterials = async (gl, obj, objHref, mtlHref = null) => {
   const baseHref = new URL(objHref, window.location.href);
-  const matTexts = await Promise.all(obj.materialLibs.map(async filename => {
-    const matHref = new URL(filename, baseHref).href;
-    const response = await fetch(matHref);
+  const materialHrefs = mtlHref ? [mtlHref] : obj.materialLibs.map(filename => new URL(filename, baseHref).href);
+
+  const matTexts = await Promise.all(materialHrefs.map(async href => {
+    const response = await fetch(href);
     return await response.text();
   }));
 
